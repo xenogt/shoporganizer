@@ -36,13 +36,13 @@ public class DataParser {
 				int counter = 0;
 				AmazonReport report = new AmazonReport();
 				//record.get(headerList[counter++].getHeaderText()) gets the header text for the column and maps the value
-				report.setOrderDate(Date.valueOf(LocalDate.parse(record.get(headerList[counter++].getHeaderText()))));
+				report.setOrderDate(LocalDate.parse(record.get(headerList[counter++].getHeaderText())));
 				report.setOrderID(record.get(headerList[counter++].getHeaderText()));
 				report.setPaymentInstrumentType(record.get(headerList[counter++].getHeaderText()));
 				report.setWebsite(record.get(headerList[counter++].getHeaderText()));
 				report.setPurchaseOrderNumber(record.get(headerList[counter++].getHeaderText()));
 				report.setOrderingCustomerEmail(record.get(headerList[counter++].getHeaderText()));
-				report.setShipmentDate(Date.valueOf(LocalDate.parse(record.get(headerList[counter++].getHeaderText()))));
+				report.setShipmentDate(LocalDate.parse(record.get(headerList[counter++].getHeaderText())));
 				report.setShippingAddressName(record.get(headerList[counter++].getHeaderText()));
 				report.setShippingAddressStreet1(record.get(headerList[counter++].getHeaderText()));
 				report.setShippingAddressStreet2(record.get(headerList[counter++].getHeaderText()));

@@ -1,18 +1,18 @@
 package com.xeno.venderdata.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class AmazonReport {
 	
 	private int reportID;
 	
-	private Date orderDate;
+	private LocalDate orderDate;
 	private String orderID;
 	private String paymentInstrumentType;
 	private String website;
 	private String purchaseOrderNumber;
 	private String orderingCustomerEmail;
-	private Date shipmentDate;
+	private LocalDate shipmentDate;
 	private String shippingAddressName;
 	private String shippingAddressStreet1;
 	private String shippingAddressStreet2;
@@ -30,10 +30,10 @@ public class AmazonReport {
 	private String buyerName;
 	private String groupName;
 	
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getOrderID() {
@@ -66,10 +66,10 @@ public class AmazonReport {
 	public void setOrderingCustomerEmail(String orderingCustomerEmail) {
 		this.orderingCustomerEmail = orderingCustomerEmail;
 	}
-	public Date getShipmentDate() {
+	public LocalDate getShipmentDate() {
 		return shipmentDate;
 	}
-	public void setShipmentDate(Date shipmentDate) {
+	public void setShipmentDate(LocalDate shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
 	public String getShippingAddressName() {

@@ -58,4 +58,18 @@ public class DBConnection {
 		}
 		return rs;
 	}
+	
+	public ResultSet getById(String tableName, String col, String value) {
+		
+		String sql = "SELECT * FROM "+tableName+" where "+col+" = "+value+";";
+		
+		ResultSet rs = null;
+		try (Connection conn = this.getConnection()){
+			Statement st = connection.createStatement();
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 }
