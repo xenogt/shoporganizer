@@ -1,18 +1,18 @@
 package com.xeno.shoporganizer.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Item {
 	
 	private int itemID;
-	private Date dateReceived;
+	private LocalDate dateReceived;
 	private String itemName;
 	private double cost;
 	private String description;
 	private String itemUrl;
 	private int orderID;
-	private Date returnRequestedDate;
-	private Date returnShippedDate;
+	private LocalDate returnRequestedDate;
+	private LocalDate returnShippedDate;
 	private boolean refundReceived;
 	private String notes;
 	
@@ -26,10 +26,10 @@ public class Item {
 		this.description = description;
 		this.orderID = orderID;
 	}
-	public Date getDateReceived() {
+	public LocalDate getDateReceived() {
 		return dateReceived;
 	}
-	public void setDateReceived(Date dateReceived) {
+	public void setDateReceived(LocalDate dateReceived) {
 		this.dateReceived = dateReceived;
 	}
 	public String getItemName() {
@@ -62,16 +62,16 @@ public class Item {
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
-	public Date getReturnRequestedDate() {
+	public LocalDate getReturnRequestedDate() {
 		return returnRequestedDate;
 	}
-	public void setReturnRequestedDate(Date returnRequestedDate) {
+	public void setReturnRequestedDate(LocalDate returnRequestedDate) {
 		this.returnRequestedDate = returnRequestedDate;
 	}
-	public Date getReturnShippedDate() {
+	public LocalDate getReturnShippedDate() {
 		return returnShippedDate;
 	}
-	public void setReturnShippedDate(Date returnShippedDate) {
+	public void setReturnShippedDate(LocalDate returnShippedDate) {
 		this.returnShippedDate = returnShippedDate;
 	}
 	public boolean isRefundReceived() {

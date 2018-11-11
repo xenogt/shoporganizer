@@ -1,6 +1,7 @@
 package com.xeno.shoporganizer.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,14 +46,14 @@ public class ItemRepository {
 			while(rs.next()) {
 				Item item = new Item();
 				item.setItemID(rs.getInt(1));
-				item.setDateReceived(rs.getDate(2));
+				item.setDateReceived(rs.getDate(2).toLocalDate());
 				item.setItemName(rs.getString(3));
 				item.setCost(rs.getDouble(4));
 				item.setDescription(rs.getString(5));
 				item.setItemUrl(rs.getString(6));
 				item.setOrderID(rs.getInt(7));
-				item.setReturnRequestedDate(rs.getDate(8));
-				item.setReturnShippedDate(rs.getDate(9));
+				item.setReturnRequestedDate(rs.getDate(8).toLocalDate());
+				item.setReturnShippedDate(rs.getDate(9).toLocalDate());
 				item.setRefundReceived(rs.getBoolean(10));
 				item.setNotes(rs.getString(11));
 				items.add(item);
@@ -73,14 +74,14 @@ public class ItemRepository {
 			
 			if(rs.next()) {
 				item.setItemID(rs.getInt(1));
-				item.setDateReceived(rs.getDate(2));
+				item.setDateReceived(rs.getDate(2).toLocalDate());
 				item.setItemName(rs.getString(3));
 				item.setCost(rs.getDouble(4));
 				item.setDescription(rs.getString(5));
 				item.setItemUrl(rs.getString(6));
 				item.setOrderID(rs.getInt(7));
-				item.setReturnRequestedDate(rs.getDate(8));
-				item.setReturnShippedDate(rs.getDate(9));
+				item.setReturnRequestedDate(rs.getDate(8).toLocalDate());
+				item.setReturnShippedDate(rs.getDate(9).toLocalDate());
 				item.setRefundReceived(rs.getBoolean(10));
 				item.setNotes(rs.getString(11));
 			}
@@ -99,14 +100,14 @@ public class ItemRepository {
 		try (Connection conn = dbConnection.getConnection()) {
 			
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
-			st.setDate(1, item.getDateReceived());
+			st.setDate(1, Date.valueOf(item.getDateReceived()));
 			st.setString(2, item.getItemName());
 			st.setDouble(3, item.getCost());
 			st.setString(4, item.getDescription());
 			st.setString(5, item.getItemUrl());
 			st.setInt(6, item.getOrderID());
-			st.setDate(7, item.getReturnRequestedDate());
-			st.setDate(8, item.getReturnShippedDate());
+			st.setDate(7, Date.valueOf(item.getReturnRequestedDate()));
+			st.setDate(8, Date.valueOf(item.getReturnShippedDate()));
 			st.setBoolean(9, item.isRefundReceived());
 			st.setString(10, item.getNotes());
 			st.executeQuery();

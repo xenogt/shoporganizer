@@ -1,6 +1,7 @@
 package com.xeno.shoporganizer.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class ShopAccountRepository {
 				account.setRegisteredID(rs.getString(3));
 				account.setPassword(rs.getString(4));
 				account.setShopURL(rs.getString(5));
-				account.setRegisteredDate(rs.getDate(6));
+				account.setRegisteredDate(rs.getDate(6).toLocalDate());
 				account.setEmailID(rs.getInt(7));
 				account.setPhone(rs.getString(8));
 				account.setAddress(rs.getString(9));
@@ -73,7 +74,7 @@ public class ShopAccountRepository {
 				account.setRegisteredID(rs.getString(3));
 				account.setPassword(rs.getString(4));
 				account.setShopURL(rs.getString(5));
-				account.setRegisteredDate(rs.getDate(6));
+				account.setRegisteredDate(rs.getDate(6).toLocalDate());
 				account.setEmailID(rs.getInt(7));
 				account.setPhone(rs.getString(8));
 				account.setAddress(rs.getString(9));
@@ -98,7 +99,7 @@ public class ShopAccountRepository {
 			st.setString(2, account.getRegisteredID());
 			st.setString(3, account.getPassword());
 			st.setString(4, account.getShopURL());
-			st.setDate(5, account.getRegisteredDate());
+			st.setDate(5, Date.valueOf(account.getRegisteredDate()));
 			st.setInt(6, account.getEmailID());
 			st.setString(7, account.getPhone());
 			st.setString(8, account.getAddress());

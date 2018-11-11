@@ -1,6 +1,7 @@
 package com.xeno.shoporganizer.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class PaymentRepository {
 				Payment payment = new Payment();
 				payment.setPaymentID(rs.getInt(1));
 				payment.setPaymentMethodID(rs.getInt(2));
-				payment.setPayOnDate(rs.getDate(3));
+				payment.setPayOnDate(rs.getDate(3).toLocalDate());
 				payment.setConfirmation(rs.getString(4));
 				payment.setNotes(rs.getString(5));
 				payments.add(payment);
@@ -59,7 +60,7 @@ public class PaymentRepository {
 			if(rs.next()) {
 				payment.setPaymentID(rs.getInt(1));
 				payment.setPaymentMethodID(rs.getInt(2));
-				payment.setPayOnDate(rs.getDate(3));
+				payment.setPayOnDate(rs.getDate(3).toLocalDate());
 				payment.setConfirmation(rs.getString(4));
 				payment.setNotes(rs.getString(5));
 			}
@@ -80,7 +81,7 @@ public class PaymentRepository {
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, payment.getPaymentID());
 			st.setInt(2, payment.getPaymentMethodID());
-			st.setDate(3, payment.getPayOnDate());
+			st.setDate(3, Date.valueOf(payment.getPayOnDate()));
 			st.setString(4, payment.getConfirmation());
 			st.setString(5, payment.getNotes());
 			st.executeQuery();

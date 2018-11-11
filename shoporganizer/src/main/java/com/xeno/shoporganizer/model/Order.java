@@ -1,14 +1,14 @@
 package com.xeno.shoporganizer.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Order {
 	
 	//pk
 	private int orderID;
-	private Date orderDate;
+	private LocalDate orderDate;
 	// all items on the order received
-	private Date orderCompleteDate;
+	private LocalDate orderCompleteDate;
 	private int shopID;
 	private int paymentID;
 	// True if has one or more items being returned
@@ -23,22 +23,22 @@ public class Order {
 		super();
 	}
 	
-	public Order(Date orderDate, int shopID, String orderNumber) {
+	public Order(LocalDate orderDate, int shopID, String orderNumber) {
 		super();
 		this.orderDate = orderDate;
 		this.shopID = shopID;
 		this.orderNumber = orderNumber;
 	}
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
-	public Date getOrderCompleteDate() {
+	public LocalDate getOrderCompleteDate() {
 		return orderCompleteDate;
 	}
-	public void setOrderCompleteDate(Date orderCompleteDate) {
+	public void setOrderCompleteDate(LocalDate orderCompleteDate) {
 		this.orderCompleteDate = orderCompleteDate;
 	}
 	public int getPaymentID() {

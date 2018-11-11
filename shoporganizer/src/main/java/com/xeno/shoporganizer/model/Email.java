@@ -1,6 +1,6 @@
 package com.xeno.shoporganizer.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,7 +9,7 @@ public class Email {
 	private int emailID;
 	private String emailAddress;
 	private String pword;
-	private Date registeredDate;
+	private LocalDate registeredDate;
 	private boolean active = true;
 	
 	public Email() {
@@ -34,10 +34,10 @@ public class Email {
 	public void setPword(String pword) {
 		this.pword = pword;
 	}
-	public Date getRegisteredDate() {
+	public LocalDate getRegisteredDate() {
 		return registeredDate;
 	}
-	public void setRegisteredDate(Date registeredDate) {
+	public void setRegisteredDate(LocalDate registeredDate) {
 		this.registeredDate = registeredDate;
 	}
 	public int getEmailID() {

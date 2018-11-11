@@ -1,6 +1,7 @@
 package com.xeno.shoporganizer.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +34,7 @@ public class EmailRepository {
 				email.setEmailID(rs.getInt(1));
 				email.setEmailAddress(rs.getString(2));
 				email.setPword(rs.getString(3));
-				email.setRegisteredDate(rs.getDate(4));
+				email.setRegisteredDate(rs.getDate(4).toLocalDate());
 				emails.add(email);
 			}
 		} catch (SQLException e) {
@@ -53,7 +54,7 @@ public class EmailRepository {
 				email.setEmailID(rs.getInt(1));
 				email.setEmailAddress(rs.getString(2));
 				email.setPword(rs.getString(3));
-				email.setRegisteredDate(rs.getDate(4));
+				email.setRegisteredDate(rs.getDate(4).toLocalDate());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class EmailRepository {
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, email.getEmailAddress());
 			st.setString(2, email.getPword());
-			st.setDate(3, null);
+			st.setDate(3, Date.valueOf(email.getRegisteredDate()));
 			
 			st.executeQuery();
 			returnVal = true;

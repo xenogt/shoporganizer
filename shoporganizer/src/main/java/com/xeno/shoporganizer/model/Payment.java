@@ -1,12 +1,12 @@
 package com.xeno.shoporganizer.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Payment {
 	
 	private int paymentID;
 	private int paymentMethodID;
-	private Date payOnDate;
+	private LocalDate payOnDate;
 	private String confirmation;
 	private String notes;
 	
@@ -14,7 +14,7 @@ public class Payment {
 		super();
 	}
 	
-	public Payment(int orderID, int paymentMethodID, Date payOnDate, String confirmation, String notes) {
+	public Payment(int orderID, int paymentMethodID, LocalDate payOnDate, String confirmation, String notes) {
 		super();
 		this.paymentMethodID = paymentMethodID;
 		this.payOnDate = payOnDate;
@@ -43,11 +43,11 @@ public class Payment {
 		this.paymentID = paymentID;
 	}
 
-	public Date getPayOnDate() {
+	public LocalDate getPayOnDate() {
 		return payOnDate;
 	}
 
-	public void setPayOnDate(Date payOnDate) {
+	public void setPayOnDate(LocalDate payOnDate) {
 		this.payOnDate = payOnDate;
 	}
 

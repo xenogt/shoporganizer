@@ -1,6 +1,6 @@
 package com.xeno.shoporganizer.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class ShopAccount {
 	
@@ -8,7 +8,7 @@ public class ShopAccount {
 	private String shopName;
 	private String registeredID;
 	private String shopURL;
-	private Date registeredDate;
+	private LocalDate registeredDate;
 	private int emailID;
 	private String phone;
 	private String address;
@@ -44,10 +44,10 @@ public class ShopAccount {
 	public void setShopURL(String shopURL) {
 		this.shopURL = shopURL;
 	}
-	public Date getRegisteredDate() {
+	public LocalDate getRegisteredDate() {
 		return registeredDate;
 	}
-	public void setRegisteredDate(Date registeredDate) {
+	public void setRegisteredDate(LocalDate registeredDate) {
 		this.registeredDate = registeredDate;
 	}
 	public int getEmailID() {
