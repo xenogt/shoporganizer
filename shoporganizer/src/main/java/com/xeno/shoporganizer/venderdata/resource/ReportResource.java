@@ -21,20 +21,22 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import com.xeno.shoporganizer.model.Email;
 import com.xeno.shoporganizer.model.Item;
 import com.xeno.shoporganizer.repository.EmailRepository;
+import com.xeno.shoporganizer.venderdata.model.AmazonReport;
 import com.xeno.shoporganizer.venderdata.repository.AmazonReportRepository;
+import com.xeno.shoporganizer.venderdata.util.DataParser;
 
 @Path("reports")
 public class ReportResource {
 
 private AmazonReportRepository amazonReportRepo;
 	
-	@POST
-	@Path("/upload")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(
-		@FormDataParam("file") InputStream uploadedInputStream,
-		@FormDataParam("file") FormDataContentDisposition fileDetail) {
-	
+//	@POST
+//	@Path("/upload")
+//	@Consumes(MediaType.MULTIPART_FORM_DATA)
+//	public Response uploadFile(
+//		@FormDataParam("file") InputStream uploadedInputStream,
+//		@FormDataParam("file") FormDataContentDisposition fileDetail) {
+//	
 		
 //		String uploadedFileLocation = "g://uploaded/" + fileDetail.getFileName();
 //	
@@ -44,36 +46,37 @@ private AmazonReportRepository amazonReportRepo;
 //		String output = "File uploaded to : " + uploadedFileLocation;
 	
 //		return Response.status(200).entity(output).build();
-		return null;
-	
-	}
-	
-	// save uploaded file to new location
-	private void writeToFile(InputStream uploadedInputStream,
-		String uploadedFileLocation) {
-	
-		try {
-			OutputStream out = new FileOutputStream(new File(
-					uploadedFileLocation));
-			int read = 0;
-			byte[] bytes = new byte[1024];
-	
-			out = new FileOutputStream(new File(uploadedFileLocation));
-			while ((read = uploadedInputStream.read(bytes)) != -1) {
-				out.write(bytes, 0, read);
-			}
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-	
-			e.printStackTrace();
-		}
-	}
+//		return null;
+//	
+//	}
+//	
+//	// save uploaded file to new location
+//	private void writeToFile(InputStream uploadedInputStream,
+//		String uploadedFileLocation) {
+//	
+//		try {
+//			OutputStream out = new FileOutputStream(new File(
+//					uploadedFileLocation));
+//			int read = 0;
+//			byte[] bytes = new byte[1024];
+//	
+//			out = new FileOutputStream(new File(uploadedFileLocation));
+//			while ((read = uploadedInputStream.read(bytes)) != -1) {
+//				out.write(bytes, 0, read);
+//			}
+//			out.flush();
+//			out.close();
+//		} catch (IOException e) {
+//	
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<Email> getEmails(){
-		EmailRepository emailRepo = new EmailRepository();
-		return emailRepo.getEmails();
+	public List<AmazonReport> getEmails() throws IOException{
+		System.out.println("OMG");
+		String uploadedFileLocation = "g://downloads/01-Jan-2018_to_10-Nov-2018.csv";
+		return DataParser.parseAmazonData(uploadedFileLocation);
 	}
 }
