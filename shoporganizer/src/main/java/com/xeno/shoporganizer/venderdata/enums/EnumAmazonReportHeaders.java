@@ -1,4 +1,4 @@
-package com.xeno.venderdata.enums;
+package com.xeno.shoporganizer.venderdata.enums;
 
 public enum EnumAmazonReportHeaders {
 	

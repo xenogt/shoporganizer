@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.xeno.shoporganizer.model.Email;
 import com.xeno.shoporganizer.repository.EmailRepository;
 
-@Path("email")
+@Path("emails")
 public class EmailResource {
 	
 	EmailRepository emailRepo = new EmailRepository();

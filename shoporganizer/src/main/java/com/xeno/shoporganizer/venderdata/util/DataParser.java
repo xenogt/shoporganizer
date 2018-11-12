@@ -1,10 +1,9 @@
-package com.xeno.venderdata.util;
+package com.xeno.shoporganizer.venderdata.util;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +12,18 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import com.xeno.venderdata.enums.EnumAmazonReportHeaders;
-import com.xeno.venderdata.model.AmazonReport;
+import com.xeno.shoporganizer.venderdata.enums.EnumAmazonReportHeaders;
+import com.xeno.shoporganizer.venderdata.model.AmazonReport;
 
 public class DataParser {
 	
-	public static List<AmazonReport> parseAmazonData() throws IOException {
+	public static List<AmazonReport> parseAmazonData(String pathToFile) throws IOException {
 		
 		List<AmazonReport> reportList = new ArrayList<>();
 		EnumAmazonReportHeaders[] headerList = EnumAmazonReportHeaders.values(); 
 		
 		try (
-				Reader reader = Files.newBufferedReader(Paths.get("")); 
+				Reader reader = Files.newBufferedReader(Paths.get(pathToFile)); 
 				CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT
 						.withHeader(EnumAmazonReportHeaders.class)
 						.withIgnoreHeaderCase()

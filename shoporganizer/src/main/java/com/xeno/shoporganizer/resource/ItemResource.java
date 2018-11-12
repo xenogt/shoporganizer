@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.xeno.shoporganizer.model.Item;
 import com.xeno.shoporganizer.repository.ItemRepository;
 
+@Path("items")
 public class ItemResource {
 	
 	ItemRepository itemRepo = new ItemRepository();

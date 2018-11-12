@@ -1,4 +1,4 @@
-package com.xeno.venderdata.model;
+package com.xeno.shoporganizer.venderdata.model;
 
 import java.time.LocalDate;
 
@@ -35,6 +35,7 @@ public class AmazonReport {
 	}
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
+		if(orderDate.equals("")) this.orderDate = null;
 	}
 	public String getOrderID() {
 		return orderID;
@@ -71,6 +72,7 @@ public class AmazonReport {
 	}
 	public void setShipmentDate(LocalDate shipmentDate) {
 		this.shipmentDate = shipmentDate;
+		if(shipmentDate.equals("")) this.shipmentDate = null;
 	}
 	public String getShippingAddressName() {
 		return shippingAddressName;

@@ -1,4 +1,4 @@
-package com.xeno.venderdata.repository;
+package com.xeno.shoporganizer.venderdata.repository;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xeno.shoporganizer.common.DBConnection;
-import com.xeno.venderdata.model.AmazonReport;
+import com.xeno.shoporganizer.venderdata.model.AmazonReport;
 
 public class AmazonReportRepository {
 	
@@ -56,13 +56,13 @@ public class AmazonReportRepository {
 			
 			while(rs.next()) {
 				AmazonReport amazonReport = new AmazonReport();
-				amazonReport.setOrderDate(rs.getDate(1).toLocalDate());
+				amazonReport.setOrderDate(rs.getDate(1)==null? null:rs.getDate(1).toLocalDate());
 				amazonReport.setOrderID(rs.getString(2));
 				amazonReport.setPaymentInstrumentType(rs.getString(3));
 				amazonReport.setWebsite(rs.getString(4));
 				amazonReport.setPurchaseOrderNumber(rs.getString(5));
 				amazonReport.setOrderingCustomerEmail(rs.getString(6));
-				amazonReport.setShipmentDate(rs.getDate(7).toLocalDate());
+				amazonReport.setShipmentDate(rs.getDate(7)==null? null:rs.getDate(7).toLocalDate());
 				amazonReport.setShippingAddressName(rs.getString(8));
 				amazonReport.setShippingAddressStreet1(rs.getString(9));
 				amazonReport.setShippingAddressStreet2(rs.getString(10));
@@ -96,13 +96,13 @@ public class AmazonReportRepository {
 		try (ResultSet rs = dbConnection.getById(TABLE_NAME, col, id)) {
 			
 			if(rs.next()) {
-				amazonReport.setOrderDate(rs.getDate(1).toLocalDate());
+				amazonReport.setOrderDate(rs.getDate(1)==null? null:rs.getDate(1).toLocalDate());
 				amazonReport.setOrderID(rs.getString(2));
 				amazonReport.setPaymentInstrumentType(rs.getString(3));
 				amazonReport.setWebsite(rs.getString(4));
 				amazonReport.setPurchaseOrderNumber(rs.getString(5));
 				amazonReport.setOrderingCustomerEmail(rs.getString(6));
-				amazonReport.setShipmentDate(rs.getDate(7).toLocalDate());
+				amazonReport.setShipmentDate(rs.getDate(7)==null? null:rs.getDate(7).toLocalDate());
 				amazonReport.setShippingAddressName(rs.getString(8));
 				amazonReport.setShippingAddressStreet1(rs.getString(9));
 				amazonReport.setShippingAddressStreet2(rs.getString(10));
@@ -134,13 +134,13 @@ public class AmazonReportRepository {
 		try (ResultSet rs = dbConnection.getById(TABLE_NAME, key, value)) {
 			
 			if(rs.next()) {
-				amazonReport.setOrderDate(rs.getDate(1).toLocalDate());
+				amazonReport.setOrderDate(rs.getDate(1)==null? null:rs.getDate(1).toLocalDate());
 				amazonReport.setOrderID(rs.getString(2));
 				amazonReport.setPaymentInstrumentType(rs.getString(3));
 				amazonReport.setWebsite(rs.getString(4));
 				amazonReport.setPurchaseOrderNumber(rs.getString(5));
 				amazonReport.setOrderingCustomerEmail(rs.getString(6));
-				amazonReport.setShipmentDate(rs.getDate(7).toLocalDate());
+				amazonReport.setShipmentDate(rs.getDate(7)==null? null:rs.getDate(7).toLocalDate());
 				amazonReport.setShippingAddressName(rs.getString(8));
 				amazonReport.setShippingAddressStreet1(rs.getString(9));
 				amazonReport.setShippingAddressStreet2(rs.getString(10));
@@ -173,13 +173,13 @@ public class AmazonReportRepository {
 		try (Connection conn = dbConnection.getConnection()) {
 			
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
-			st.setDate(1, Date.valueOf(amazonReport.getOrderDate()));
+			st.setDate(1, amazonReport.getOrderDate()==null?null:Date.valueOf(amazonReport.getOrderDate()));
 			st.setString(2, amazonReport.getOrderID());
 			st.setString(3, amazonReport.getPaymentInstrumentType());
 			st.setString(4, amazonReport.getWebsite());
 			st.setString(5, amazonReport.getPurchaseOrderNumber());
 			st.setString(6, amazonReport.getOrderingCustomerEmail());
-			st.setDate(7, Date.valueOf(amazonReport.getShipmentDate()));
+			st.setDate(7, amazonReport.getShipmentDate()==null?null:Date.valueOf(amazonReport.getShipmentDate()));
 			st.setString(8, amazonReport.getShippingAddressName());
 			st.setString(9, amazonReport.getShippingAddressStreet1());
 			st.setString(10, amazonReport.getShippingAddressStreet2());

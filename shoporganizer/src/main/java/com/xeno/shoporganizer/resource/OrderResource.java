@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.xeno.shoporganizer.model.Order;
 import com.xeno.shoporganizer.repository.OrderRepository;
 
-@Path("order")
+@Path("orders")
 public class OrderResource {
 	
 	private OrderRepository orderRepo;

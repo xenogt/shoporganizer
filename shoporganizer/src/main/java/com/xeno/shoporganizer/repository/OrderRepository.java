@@ -42,8 +42,8 @@ public class OrderRepository {
 			while(rs.next()) {
 				Order order = new Order();
 				order.setOrderID(rs.getInt(1));
-				order.setOrderDate(rs.getDate(2).toLocalDate());
-				order.setOrderCompleteDate(rs.getDate(3).toLocalDate());
+				order.setOrderDate(rs.getDate(2)==null? null:rs.getDate(2).toLocalDate());
+				order.setOrderCompleteDate(rs.getDate(3)==null? null:rs.getDate(3).toLocalDate());
 				order.setShopID(rs.getInt(4));
 				order.setPaymentID(rs.getInt(5));
 				order.setHasReturnItem(rs.getBoolean(6));
@@ -68,8 +68,8 @@ public class OrderRepository {
 			
 			if(rs.next()) {
 				order.setOrderID(rs.getInt(1));
-				order.setOrderDate(rs.getDate(2).toLocalDate());
-				order.setOrderCompleteDate(rs.getDate(3).toLocalDate());
+				order.setOrderDate(rs.getDate(2)==null? null:rs.getDate(2).toLocalDate());
+				order.setOrderCompleteDate(rs.getDate(3)==null? null:rs.getDate(3).toLocalDate());
 				order.setShopID(rs.getInt(4));
 				order.setPaymentID(rs.getInt(5));
 				order.setHasReturnItem(rs.getBoolean(6));
@@ -92,8 +92,8 @@ public class OrderRepository {
 		try (Connection conn = dbConnection.getConnection()) {
 			
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
-			st.setDate(1, Date.valueOf(order.getOrderDate()));
-			st.setDate(2, Date.valueOf(order.getOrderCompleteDate()));
+			st.setDate(1, order.getOrderDate()==null?null:Date.valueOf(order.getOrderDate()));
+			st.setDate(2, order.getOrderCompleteDate()==null?null:Date.valueOf(order.getOrderCompleteDate()));
 			st.setInt(3, order.getShopID());
 			st.setInt(4, order.getPaymentID());
 			st.setBoolean(5, order.isHasReturnItem());
