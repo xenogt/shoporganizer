@@ -84,9 +84,8 @@ public class OrderRepository {
 		return order;
 	}
 	
-	public boolean add(Order order) {
+	public void add(Order order) {
 		
-		boolean addSuccess = false;
 		PreparedStatement st;
 		
 		try (Connection conn = dbConnection.getConnection()) {
@@ -100,13 +99,24 @@ public class OrderRepository {
 			st.setBoolean(6,  order.isReturnCompleted());
 			st.setString(7, order.getOrderNumber());
 			st.setString(8, order.getNotes());
-			st.executeQuery();
-			addSuccess = true;
+			int affectedRows = st.executeUpdate();
+
+	        if (affectedRows == 0) {
+	            throw new SQLException("Creating order failed, no rows affected.");
+	        }
+
+	        try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                order.setOrderID(generatedKeys.getInt(1));
+	            }
+	            else {
+	                throw new SQLException("Creating order failed, no ID obtained.");
+	            }
+	        }
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return addSuccess;
 	}
 	
 }

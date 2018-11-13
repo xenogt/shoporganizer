@@ -63,6 +63,24 @@ public class PaymentMethodRepository {
 		return paymentMethod;
 	}
 	
+	public PaymentMethod getByKeyValuePair(String key, String value) {
+		
+		PaymentMethod paymentMethod = new PaymentMethod();
+		
+		try (ResultSet rs = dbConnection.getById(TABLE_NAME, key, value)) {
+			
+			if(rs.next()) {
+				paymentMethod.setPaymentMethodID(rs.getInt(1));
+				paymentMethod.setFinancialInstitude(rs.getString(2));
+				paymentMethod.setAcctNum(rs.getString(3));
+				paymentMethod.setNotes(rs.getString(4));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return paymentMethod;
+	}
+	
 	public boolean add(PaymentMethod paymentMethod) {
 		
 		boolean addSuccess = false;

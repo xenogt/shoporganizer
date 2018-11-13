@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mariadb.jdbc.internal.com.read.resultset.SelectResultSet;
+
 import com.xeno.shoporganizer.common.DBConnection;
 import com.xeno.shoporganizer.model.Payment;
 
@@ -71,25 +73,33 @@ public class PaymentRepository {
 		return payment;
 	}
 	
-	public boolean add(Payment payment) {
+	public void add(Payment payment) {
 		
-		boolean addSuccess = false;
 		PreparedStatement st;
 		
 		try (Connection conn = dbConnection.getConnection()) {
 			
 			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
-			st.setInt(1, payment.getPaymentID());
-			st.setInt(2, payment.getPaymentMethodID());
-			st.setDate(3, payment.getPayOnDate()==null?null:Date.valueOf(payment.getPayOnDate()));
-			st.setString(4, payment.getConfirmation());
-			st.setString(5, payment.getNotes());
-			st.executeQuery();
-			addSuccess = true;
-			
+			st.setInt(1, payment.getPaymentMethodID());
+			st.setDate(2, payment.getPayOnDate()==null?null:Date.valueOf(payment.getPayOnDate()));
+			st.setString(3, payment.getConfirmation());
+			st.setString(4, payment.getNotes());
+			int affectedRows = st.executeUpdate();
+
+	        if (affectedRows == 0) {
+	            throw new SQLException("Creating payment failed, no rows affected.");
+	        }
+
+	        try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	                payment.setPaymentID(generatedKeys.getInt(1));
+	            }
+	            else {
+	                throw new SQLException("Creating payment failed, no ID obtained.");
+	            }
+	        }
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return addSuccess;
 	}
 }

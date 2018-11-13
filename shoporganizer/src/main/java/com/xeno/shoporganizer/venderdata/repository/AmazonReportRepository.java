@@ -165,14 +165,14 @@ public class AmazonReportRepository {
 		return amazonReport;
 	}
 	
-	public boolean add(AmazonReport amazonReport) {
+	public int add(AmazonReport amazonReport) {
 		
-		boolean addSuccess = false;
 		PreparedStatement st;
+		int affectedRows = 0;
 		
 		try (Connection conn = dbConnection.getConnection()) {
 			
-			st = conn.prepareStatement(INSERT_STATEMENT, Statement.RETURN_GENERATED_KEYS);
+			st = conn.prepareStatement(INSERT_STATEMENT);
 			st.setDate(1, amazonReport.getOrderDate()==null?null:Date.valueOf(amazonReport.getOrderDate()));
 			st.setString(2, amazonReport.getOrderID());
 			st.setString(3, amazonReport.getPaymentInstrumentType());
@@ -196,12 +196,15 @@ public class AmazonReportRepository {
 			st.setDouble(21, amazonReport.getTotalCharged());
 			st.setString(22, amazonReport.getBuyerName());
 			st.setString(23, amazonReport.getGroupName());
-			ResultSet rs = st.executeQuery();
-			addSuccess = true;
-			
+			affectedRows = st.executeUpdate();
+
+	        if (affectedRows == 0) {
+	            throw new SQLException("Creating amazon report failed, no rows affected.");
+	        }
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return addSuccess;
+		
+		return affectedRows;
 	}
 }
