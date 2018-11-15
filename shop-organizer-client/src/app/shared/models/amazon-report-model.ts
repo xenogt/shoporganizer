@@ -1,4 +1,7 @@
-export class AmazonReport {
+import { Deserializable } from "../interfaces/deserializable-interface";
+
+export class AmazonReport implements Deserializable {
+    
     orderDate: Date;
     orderID: number;
     paymentInstrumentType?: string;
@@ -22,4 +25,9 @@ export class AmazonReport {
     totalCharged?: number;
     buyerName?: string;
     groupName?: string;
+
+    deserialize(input: any): this {
+        Object.assign(this, input);
+        return this;
+    }
 }

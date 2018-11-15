@@ -1,4 +1,7 @@
-export class ShopAccount {
+import { Deserializable } from "../interfaces/deserializable-interface";
+
+export class ShopAccount implements Deserializable {
+    
     shopID?: number;
     shopName: string;
     registeredID: string;
@@ -10,4 +13,9 @@ export class ShopAccount {
     address?: string;
     paymentMethodID: number;
     notes?: string;
+
+    deserialize(input: any): this {
+        Object.assign(this, input);
+        return this;
+    }
 }
