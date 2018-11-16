@@ -16,7 +16,7 @@ import com.xeno.shoporganizer.repository.OrderRepository;
 @Path("orders")
 public class OrderResource {
 	
-	private OrderRepository orderRepo;
+	private OrderRepository orderRepo = new OrderRepository();
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

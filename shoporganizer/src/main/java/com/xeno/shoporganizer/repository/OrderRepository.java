@@ -84,9 +84,10 @@ public class OrderRepository {
 		return order;
 	}
 	
-	public void add(Order order) {
+	public boolean add(Order order) {
 		
 		PreparedStatement st;
+		int affectedRows = 0;
 		
 		try (Connection conn = dbConnection.getConnection()) {
 			
@@ -99,7 +100,7 @@ public class OrderRepository {
 			st.setBoolean(6,  order.isReturnCompleted());
 			st.setString(7, order.getOrderNumber());
 			st.setString(8, order.getNotes());
-			int affectedRows = st.executeUpdate();
+			affectedRows = st.executeUpdate();
 
 	        if (affectedRows == 0) {
 	            throw new SQLException("Creating order failed, no rows affected.");
@@ -117,6 +118,8 @@ public class OrderRepository {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return affectedRows == 0? false: true;
 	}
 	
 }
