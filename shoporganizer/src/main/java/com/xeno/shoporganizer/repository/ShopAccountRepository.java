@@ -62,7 +62,7 @@ public class ShopAccountRepository {
 		return accounts;
 	}
 	
-	public ShopAccount get(int id) {
+	public ShopAccount getById(int id) {
 		
 		ShopAccount account = new ShopAccount();
 		String col = "shop_id";

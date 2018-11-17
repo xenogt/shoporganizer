@@ -59,6 +59,38 @@ public class OrderRepository {
 		return orders;
 	}
 	
+	public List<Object> getOrderToDisplay(){
+		List<Object> orders = new ArrayList<>();
+		
+		String sql = "select "
+					+ "s.shop_name, "
+					+ "o.order_date, "
+					+ "o.order_number, "
+					+ "p.pay_on_date, "
+					+ "pm.financial_institute, "
+					+ "pm.account_number "
+				+ "from orders o, "
+					+ "payment p, "
+					+ "payment_method pm, "
+					+ "shop_account s "
+				+ "where o.payment_id=p.payment_id "
+				+ "and p.payment_method_id=pm.payment_method_id "
+				+ "and o.shop_id=s.shop_id;";
+		
+		try (Connection conn = dbConnection.getConnection()){
+			Statement st = conn.createStatement();
+			try (ResultSet rs = st.executeQuery(sql)) {
+				while(rs.next()) {
+					
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return orders;
+	}
+	
 	public Order getById(int id) {
 		
 		Order order = new Order();

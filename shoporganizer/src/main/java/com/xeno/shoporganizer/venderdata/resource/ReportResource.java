@@ -18,6 +18,15 @@ public class ReportResource {
 
 private AmazonReportRepository amazonReportRepo = new AmazonReportRepository();
 	
+	private AmazonReportRepository amazonRepo = new AmazonReportRepository();
+
+	@GET
+	@Path("amazon")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public List<AmazonReport> getReports() {
+		return amazonRepo.getAmazonReports();
+	}
+	
 	@GET
 	@Path("/process-report")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

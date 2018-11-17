@@ -10,32 +10,32 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.xeno.shoporganizer.model.Payment;
-import com.xeno.shoporganizer.repository.PaymentRepository;
+import com.xeno.shoporganizer.model.ShopAccount;
+import com.xeno.shoporganizer.repository.ShopAccountRepository;
 
-@Path("payments")
-public class PaymentResource {
+@Path("shops")
+public class ShopAccountResource {
 	
-private PaymentRepository paymentRepo = new PaymentRepository();
+	private ShopAccountRepository shopRepo = new ShopAccountRepository();
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<Payment> getPayments(){
-		return paymentRepo.getPayments();
+	public List<ShopAccount> getAccounts(){
+		return shopRepo.getAccounts();
 	}
 	
 	@POST
 	@Path("add")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public boolean add(Payment payment) {
-		return paymentRepo.add(payment);
+	public boolean add(ShopAccount account) {
+		return shopRepo.add(account);
 	}
 	
 	@GET
 	@Path("/{id}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Payment get(@PathParam("id") int paymentID) {
-		return paymentRepo.getById(paymentID);
+	public ShopAccount get(@PathParam("id") int shopID) {
+		return shopRepo.getById(shopID);
 	}
 	
 }

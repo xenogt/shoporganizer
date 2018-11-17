@@ -16,7 +16,7 @@ import com.xeno.shoporganizer.model.Payment;
 
 public class PaymentRepository {
 	DBConnection dbConnection;
-	private static final String TABLE_NAME = "PAYMENT_METHOD";
+	private static final String TABLE_NAME = "PAYMENT";
 	private static final String INSERT_STATEMENT = 
 			"insert into PAYMENT ("
 			+ "PAYMENT_METHOD_ID, "
@@ -30,7 +30,7 @@ public class PaymentRepository {
 		dbConnection = new DBConnection();
 	}
 	
-	public List<Payment> getOrders() {
+	public List<Payment> getPayments() {
 		
 		List<Payment> payments = new ArrayList<>();
 		
@@ -52,7 +52,7 @@ public class PaymentRepository {
 		return payments;
 	}
 	
-	public Payment get(int id) {
+	public Payment getById(int id) {
 		
 		Payment payment = new Payment();
 		String col = "payment_id";
@@ -73,9 +73,10 @@ public class PaymentRepository {
 		return payment;
 	}
 	
-	public void add(Payment payment) {
+	public boolean add(Payment payment) {
 		
 		PreparedStatement st;
+		int affectedRows = 0;
 		
 		try (Connection conn = dbConnection.getConnection()) {
 			
@@ -84,7 +85,7 @@ public class PaymentRepository {
 			st.setDate(2, payment.getPayOnDate()==null?null:Date.valueOf(payment.getPayOnDate()));
 			st.setString(3, payment.getConfirmation());
 			st.setString(4, payment.getNotes());
-			int affectedRows = st.executeUpdate();
+			affectedRows = st.executeUpdate();
 
 	        if (affectedRows == 0) {
 	            throw new SQLException("Creating payment failed, no rows affected.");
@@ -101,5 +102,7 @@ public class PaymentRepository {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return affectedRows == 0 ? false : true;
 	}
 }

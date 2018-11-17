@@ -26,7 +26,7 @@ public class PaymentMethodRepository {
 		dbConnection = new DBConnection();
 	}
 	
-	public List<PaymentMethod> getOrders() {
+	public List<PaymentMethod> paymentMethods() {
 		
 		List<PaymentMethod> paymentMethods = new ArrayList<>();
 		try (ResultSet rs = dbConnection.getAll(TABLE_NAME)) {
@@ -45,7 +45,7 @@ public class PaymentMethodRepository {
 		return paymentMethods;
 	}
 	
-	public PaymentMethod get(int id) {
+	public PaymentMethod getById(int id) {
 		
 		PaymentMethod paymentMethod = new PaymentMethod();
 		String col = "payment_id";
